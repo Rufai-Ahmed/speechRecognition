@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 
-const URL: string = "http://localhost:4000";
+const URL: string = "https://speech-main-be.onrender.com";
 
 export const createUser = async (data: {}) => {
   try {
