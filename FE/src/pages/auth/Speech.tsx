@@ -10,6 +10,9 @@ import { sendMails } from "../../api/userAPI";
 
 export const Speech = ({ id }: any) => {
   const [key, setKey] = useState("");
+
+  const script = useSelector((state: any) => state.transcript);
+
   const dispatch = useDispatch();
 
   const {
@@ -29,13 +32,13 @@ export const Speech = ({ id }: any) => {
   }, [transcript]);
 
   const sendMail = () => {
-    useEffect(() => {
-      if (id!) {
-        const script = useSelector((state: any) => state.transcript);
-
-        sendMails(id, script);
-      }
-    }, [transcript]);
+    if (id!) {
+      sendMails(id, script)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch(() => console.error());
+    }
   };
 
   return (
