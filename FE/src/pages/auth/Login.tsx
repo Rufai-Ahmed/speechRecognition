@@ -2,6 +2,7 @@ import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 import React, { useState } from "react";
 import { getOne } from "../../api/userAPI";
 import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -50,6 +51,10 @@ export const Login = () => {
         >
           Login
         </Button>
+
+        <center className="text-[17px]">
+          <NavLink to="/register/1">Register Here</NavLink>
+        </center>
       </form>
     </div>
   );
