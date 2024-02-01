@@ -33,7 +33,7 @@ export const Speech = ({ id }: any) => {
 
   const sendMail = () => {
     if (id!) {
-      sendMails(id, script)
+      sendMails(id, { voiceKey: script })
         .then((res) => {
           console.log(res);
         })
