@@ -29,11 +29,13 @@ export const Speech = ({ id }: any) => {
   }, [transcript]);
 
   const sendMail = () => {
-    if (id!) {
-      const script = useSelector((state: any) => state.transcript);
+    useEffect(() => {
+      if (id!) {
+        const script = useSelector((state: any) => state.transcript);
 
-      sendMails(id, script);
-    }
+        sendMails(id, script);
+      }
+    }, [transcript]);
   };
 
   return (
