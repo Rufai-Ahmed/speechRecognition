@@ -1,0 +1,68 @@
+import { useEffect, useState } from "react";
+import { FaRecordVinyl, FaStop } from "react-icons/fa";
+import { MdLoop } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
+import { addVoice } from "../../global/reduxState";
+import { sendMails } from "../../api/userAPI";
+
+export const Speech = ({ id }: any) => {
+  const [key, setKey] = useState("");
+  const dispatch = useDispatch();
+
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition,
+  } = useSpeechRecognition();
+
+  if (!browserSupportsSpeechRecognition) {
+    return <span>Browser doesn't support speech recognition.</span>;
+  }
+
+  useEffect(() => {
+    setKey(transcript);
+    dispatch(addVoice(key));
+  }, [transcript]);
+
+  const sendMail = () => {
+    if (id!) {
+      const script = useSelector((state: any) => state.transcript);
+
+      sendMails(id, script);
+    }
+  };
+
+  return (
+    <div className="flex flex-col items-start gap-3">
+      <p>Microphone: {listening ? "on" : "off"}</p>
+      <div className="flex gap-5 items-center">
+        <button
+          className="flex gap-5 items-center bg-green-600 text-white rounded-md p-4 py-2"
+          onClick={() => {
+            SpeechRecognition.startListening();
+            sendMail();
+          }}
+        >
+          Start <FaRecordVinyl />
+        </button>
+        <button
+          className="flex gap-5 items-center bg-red-600 text-white rounded-md p-4 py-2"
+          onClick={SpeechRecognition.stopListening}
+        >
+          Stop <FaStop />
+        </button>
+        <button
+          className="flex gap-5 items-center bg-neutral-600 text-white rounded-md p-4 py-2"
+          onClick={resetTranscript}
+        >
+          Reset <MdLoop />
+        </button>
+      </div>
+      <p>Transcripts: {transcript} </p>
+    </div>
+  );
+};
