@@ -7,6 +7,7 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 import { addVoice } from "../../global/reduxState";
 import { sendMails } from "../../api/userAPI";
+import toast, { Toaster } from "react-hot-toast";
 
 export const Speech = ({ id }: any) => {
   const [key, setKey] = useState("");
@@ -23,6 +24,8 @@ export const Speech = ({ id }: any) => {
   } = useSpeechRecognition();
 
   if (!browserSupportsSpeechRecognition) {
+    toast.error("Browser doesn't support speech recognition.");
+
     return <span>Browser doesn't support speech recognition.</span>;
   }
 
@@ -43,6 +46,7 @@ export const Speech = ({ id }: any) => {
 
   return (
     <div className="flex flex-col items-start gap-3">
+      <Toaster position="top-center" reverseOrder={false} />
       <p>Microphone: {listening ? "on" : "off"}</p>
       <div className="flex gap-5 items-center">
         <button
