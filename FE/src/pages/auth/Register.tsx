@@ -36,7 +36,7 @@ export const Register = () => {
   const transcript = useSelector((state: any) => state.transcript);
 
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="flex items-center justify-center h-screen w-full">
       {pathname.includes("1") ? (
         <Flowbite theme={{ theme: customTheme }}>
           <div className="w-[400px]">
@@ -87,7 +87,7 @@ export const Register = () => {
         </Flowbite>
       ) : pathname?.includes("2") ? (
         <Flowbite theme={{ theme: customTheme }}>
-          <div className="w-[400px]">
+          <div className="md:w-[400px] w-[95%]">
             <div className="flex  flex-col gap-5">
               <div>
                 <div className="mb-2 block">

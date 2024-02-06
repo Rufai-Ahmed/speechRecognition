@@ -11,7 +11,7 @@ export const Login = () => {
 
   return (
     <div className="w-full h-screen flex justify-center items-center">
-      <form className="flex w-[400px] flex-col gap-4">
+      <form className="flex w-[95%] md:w-[400px] flex-col gap-4">
         <div>
           <div className="mb-2 block">
             <Label htmlFor="email1" value="Your email" />
